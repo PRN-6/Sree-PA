@@ -7,8 +7,13 @@ import io
 import socket
 import platform
 import psutil
-from fastapi import APIRouter, Response, Query
-import qrcode
+from fastapi import APIRouter, Response, Query, HTTPException
+try:
+    import qrcode
+    QRCODE_AVAILABLE = True
+except ImportError:
+    qrcode = None
+    QRCODE_AVAILABLE = False
 from ..core.config import settings
 from ..ai.ollama_client import ollama_client
 from ..ai.universal_router import universal_router, PROVIDER_CASCADES
@@ -95,6 +100,12 @@ async def get_mobile_pairing_qrcode():
     Generates a live QR Code image pointing to SREE's mobile URL
     so the user can point their Android camera and connect instantly.
     """
+    if not QRCODE_AVAILABLE or qrcode is None:
+        raise HTTPException(
+            status_code=503,
+            detail="QR code generation library is not installed. Please install 'qrcode[pil]'."
+        )
+
     lan_ip = get_lan_ip()
     mobile_url = f"http://{lan_ip}:{settings.PORT}"
     

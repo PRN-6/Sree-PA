@@ -9,25 +9,46 @@ import ctypes
 import logging
 from typing import Dict, Any, List, Optional, Tuple
 
-import pyautogui
+try:
+    import pyautogui
+    # PyAutoGUI Safety configuration
+    pyautogui.FAILSAFE = False
+    pyautogui.PAUSE = 0.03
+    PYAUTOGUI_AVAILABLE = True
+except Exception as e:
+    pyautogui = None
+    PYAUTOGUI_AVAILABLE = False
 
 logger = logging.getLogger("sree.desktop_control")
-
-# PyAutoGUI Safety configuration
-pyautogui.FAILSAFE = False
-pyautogui.PAUSE = 0.03
+if not PYAUTOGUI_AVAILABLE:
+    logger.warning("PyAutoGUI unavailable or display cannot be opened. Desktop automation running in fallback mode.")
 
 class DesktopControlEngine:
     def __init__(self):
-        self.screen_width, self.screen_height = pyautogui.size()
+        if PYAUTOGUI_AVAILABLE and pyautogui is not None:
+            try:
+                self.screen_width, self.screen_height = pyautogui.size()
+            except Exception:
+                self.screen_width, self.screen_height = (1920, 1080)
+        else:
+            self.screen_width, self.screen_height = (1920, 1080)
 
     def get_screen_dimensions(self) -> Tuple[int, int]:
-        self.screen_width, self.screen_height = pyautogui.size()
+        if PYAUTOGUI_AVAILABLE and pyautogui is not None:
+            try:
+                self.screen_width, self.screen_height = pyautogui.size()
+            except Exception:
+                pass
         return self.screen_width, self.screen_height
 
     def get_cursor_position(self) -> Tuple[int, int]:
-        point = pyautogui.position()
-        return point.x, point.y
+        if PYAUTOGUI_AVAILABLE and pyautogui is not None:
+            try:
+                point = pyautogui.position()
+                return point.x, point.y
+            except Exception:
+                return (0, 0)
+        return (0, 0)
 
     # --- Mouse Control ---
     def move_mouse(self, x: int, y: int, duration: float = 0.1) -> Dict[str, Any]:

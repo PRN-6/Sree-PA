@@ -13,3 +13,19 @@ psutil>=5.9.0
 sqlalchemy>=2.0.0
 alembic>=1.13.0
 
+# Desktop & OS Automation
+pyautogui>=0.9.54
+pystray>=0.19.5
+pillow>=10.0.0
+
+# Web & Networking
+beautifulsoup4>=4.12.0
+qrcode[pil]>=8.0
+
+# Audio & Voice Biometrics
+numpy>=1.26.0
+scipy>=1.12.0
+
+# Testing & Quality Assurance
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
