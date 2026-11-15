@@ -1,0 +1,50 @@
+name: ✨ Feature Request / Enhancement
+description: Suggest a new idea, capability, or improvement for Project SREE
+title: "[FEATURE]: "
+labels: ["enhancement", "feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We welcome proposals for new features, AI integrations, voice skills, and automation capabilities!
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement / Motivation
+      description: Is your feature request related to a problem or limitation?
+      placeholder: I'm always frustrated when...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution / Feature Specification
+      description: Describe your proposed solution or how the feature should behave.
+      placeholder: Add support for...
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions or features you've considered.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Target Subsystem
+      options:
+        - "Local AI & LLM Routing (Ollama / Cloud)"
+        - "Voice Biometrics & Speech Synthesis"
+        - "OS & Window Automation (PyAutoGUI / Win32)"
+        - "Frontend JARVIS HUD / PWA Interface"
+        - "Personal Memory & Knowledge Graph"
+        - "IoT / LAN Smart Home Integration"
+        - "Developer Tooling & Testing"
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to submit a pull request for this feature

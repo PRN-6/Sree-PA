@@ -490,6 +490,38 @@ class TestSecurityAllowlistAndTelemetry(unittest.TestCase):
         self.assertIsNotNone(res)
         self.assertIn("SREE is listening", res)
 
+    def test_88_fresh_db_auto_bootstrap(self):
+        import tempfile
+        from backend.app.database.db import DatabaseManager
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_db = Path(tmp_dir) / "bootstrap_test.db"
+            db = DatabaseManager(db_path=tmp_db)
+            db.add_memory("test_key", "test_val", "general")
+            mems = db.get_all_memories()
+            self.assertEqual(len(mems), 1)
+            self.assertEqual(mems[0]["key"], "test_key")
+            db.engine.dispose()
+
+    def test_89_desktop_control_dimensions(self):
+        from backend.app.automation.desktop_control import desktop_control
+        w, h = desktop_control.get_screen_dimensions()
+        self.assertGreater(w, 0)
+        self.assertGreater(h, 0)
+
+    def test_90_wipe_data_security_full_reset(self):
+        from backend.app.api.chat import handle_proactive_actions
+        # Stage wipe data
+        security_guard.stage_pending_action(
+            action_type="wipe_data",
+            payload={},
+            prompt_message="Test wipe"
+        )
+        self.assertTrue(security_guard.has_pending_action())
+        # Confirm
+        res = asyncio.run(handle_proactive_actions("yes"))
+        self.assertIn("wiped successfully", res.lower())
+        self.assertFalse(security_guard.has_pending_action())
+
 
 # =====================================================================
 # Main Test Runner

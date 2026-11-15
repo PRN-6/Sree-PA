@@ -81,6 +81,9 @@ class DatabaseManager:
 
         self.SessionLocal = sessionmaker(bind=self.engine, autoflush=False, autocommit=False)
 
+        # Auto-initialize database schema if tables do not exist
+        Base.metadata.create_all(bind=self.engine)
+
     def get_session(self) -> Session:
         return self.SessionLocal()
 

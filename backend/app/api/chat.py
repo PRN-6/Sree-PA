@@ -55,8 +55,8 @@ async def handle_proactive_actions(user_message: str) -> Optional[str]:
     handled, action, confirm_msg = security_guard.check_pending_confirmation(user_message)
     if handled:
         if action and action.get("type") == "wipe_data":
-            db_manager.clear_conversation()
-            return "Confirmation verified. All personal conversation records wiped successfully."
+            db_manager.wipe_all_data()
+            return "Confirmation verified. All personal conversation records, memories, notes, and tasks wiped successfully."
         return confirm_msg
 
     # 2. Check Skill Crystallizer 0ms Fast Paths

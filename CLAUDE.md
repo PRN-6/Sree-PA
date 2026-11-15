@@ -25,5 +25,7 @@ SREE is a local-first AI assistant designed for maximum privacy and zero operati
 - **Automation**: All system commands must pass through `SecurityGuard` in `backend/app/automation/security_guard.py`.
 
 ## ⚙️ Critical Commands
+- **Unit Tests**: `python tests/test_unit_suite.py` (90 tests)
+- **Desktop Automation Tests**: `python tests/test_desktop_screen_suite.py` (19 tests)
 - **DB Migrations**: `cd backend && alembic revision --autogenerate -m "desc" && alembic upgrade head`
 - **Config Update**: Use `update_runtime_setting(key, value)` to persist settings to `.env`.

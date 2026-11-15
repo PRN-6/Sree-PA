@@ -189,6 +189,16 @@
                 <canvas id="audioVisualizerCanvas"></canvas>
             </div>
 
+            <!-- Interactive HUD Command & Speech Input Bar -->
+            <div class="hud-command-input-bar">
+                <div class="hud-cmd-input-wrap">
+                    <span class="hud-cmd-icon">⚡</span>
+                    <input type="text" id="chatInput" class="hud-cmd-input" placeholder="Type a command or query (e.g., 'open notepad', 'what's the weather', 'note down meeting')... [Press Enter]" autocomplete="off" />
+                    <button id="sendBtn" class="hud-cmd-send-btn" title="Send Command (Enter)">➤</button>
+                    <button id="micBtn" class="hud-cmd-mic-btn" title="Toggle Live Voice">🎙️</button>
+                </div>
+            </div>
+
             <!-- Bottom Subtitles and Action Pills -->
             <div class="footer-control-row">
                 <div class="live-subtitle-box">
@@ -290,10 +300,7 @@
         </div>
     </div>
 
-    <!-- Hidden audio elements & inputs for programmatic compatibility -->
-    <button id="micBtn" style="display: none;"></button>
-    <button id="sendBtn" style="display: none;"></button>
-    <textarea id="chatInput" style="display: none;"></textarea>
+    <!-- Container for dynamic chat message records -->
     <div id="chatMessages" style="display: none;"></div>
 
     <script src="/js/app.js"></script>

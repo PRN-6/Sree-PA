@@ -605,6 +605,14 @@ class SreeApp {
             }
         });
 
+        // Global shortcut: press '/' to focus HUD command input
+        window.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement !== this.chatInput && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+                e.preventDefault();
+                this.chatInput.focus();
+            }
+        });
+
         this.chatInput.addEventListener('input', () => this.autoResizeInput());
 
         if (this.clearChatBtn) {

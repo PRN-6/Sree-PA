@@ -34,7 +34,7 @@ An intelligent, private, zero-operating-cost personal digital assistant inspired
 ## Quickstart Guide
 
 ### 1. Launch SREE Master Server
-From the project directory (`d:\sri`), run:
+From the project directory, run:
 ```bash
 python scripts/start.py
 ```
@@ -47,9 +47,9 @@ http://localhost:8005
 
 ### 3. Connect from Android Smartphone
 1. Connect your Android phone to the **same Wi-Fi network** as your laptop.
-2. Open Chrome on Android and navigate to:
+2. Open Chrome on Android and navigate to the LAN IP shown in the console or QR code modal:
 ```
-http://10.43.242.207:8005
+http://<your-laptop-lan-ip>:8005
 ```
 3. Tap the Chrome three-dot menu (`⋮`) and tap **"Add to Home screen"** or **"Install App"**.
 4. SREE will launch as a standalone fullscreen app on your phone with shared conversations, memories, notes, and voice interaction!
@@ -68,11 +68,11 @@ SREE includes a native Windows 24/7 background listener that runs automatically 
 - **Desktop HUD Summon**: Say *"Open SREE"* or *"Show dashboard"* anytime to pop up the desktop app window.
 
 ### Control Scripts
-- [Enroll_My_Voice.bat](file:///d:/sri/Enroll_My_Voice.bat): Calibrate and train your unique voiceprint so SREE responds strictly to YOU.
-- [Enable_Auto_Startup.bat](file:///d:/sri/Enable_Auto_Startup.bat): Enable SREE to start on Windows power-on.
-- [Disable_Auto_Startup.bat](file:///d:/sri/Disable_Auto_Startup.bat): Disable automatic boot launch.
-- [Start_Background_Listener.bat](file:///d:/sri/Start_Background_Listener.bat): Start background listening immediately.
-- [Stop_Background_Listener.bat](file:///d:/sri/Stop_Background_Listener.bat): Stop the background listener.
+- `Enroll_My_Voice.bat`: Calibrate and train your unique voiceprint so SREE responds strictly to YOU.
+- `Enable_Auto_Startup.bat`: Enable SREE to start on Windows power-on.
+- `Disable_Auto_Startup.bat`: Disable automatic boot launch.
+- `Start_Background_Listener.bat`: Start background listening immediately.
+- `Stop_Background_Listener.bat`: Stop the background listener.
 
 ---
 
@@ -88,7 +88,7 @@ SREE includes an acoustic voiceprint verification engine that measures fundament
 ## Directory Structure
 
 ```
-d:\sri\
+Sree-PA/
 ├── backend/
 │   ├── app/
 │   │   ├── main.py              # FastAPI app with LAN CORS & static file mount
@@ -140,21 +140,35 @@ d:\sri\
 
 ---
 
-## Automated Verification & 87 Unit Tests Suite
+## Automated Verification & Test Suites (109 Tests)
 
 You can verify the entire architecture across all sub-systems at any time:
 
-### 1. 87 Unit Tests Suite (100% Pass Rate in ~0.12s)
-Covers Dynamic Windows Path Resolution, 3-Tier Security Confirmation Guard, Skill Crystallizer 0ms fast-paths, Universal Multi-Provider AI Routing with Intra-Provider Cascades, SQLite Long-term Memory, Notes, Reminders, and Telemetry:
+### 1. 90 Master Unit Tests Suite (100% Pass Rate)
+Covers Dynamic Windows Path Resolution, 3-Tier Security Confirmation Guard, Skill Crystallizer 0ms fast-paths, Universal Multi-Provider AI Routing with Intra-Provider Cascades, SQLite Auto-Bootstrap Schema, Long-term Memory, Notes, Reminders, and Telemetry:
 ```bash
 python tests/test_unit_suite.py
 ```
 
-### 2. Full Live System Integration Test
+### 2. Desktop Automation & Remote Screen Suite (19 Tests)
+Covers screen capture, cursor tracking, mouse/keyboard automation, OS shortcuts, and voice macros:
+```bash
+python tests/test_desktop_screen_suite.py
+```
+
+### 3. Full Live System Integration Test
 Verifies live interaction with the active running server and Ollama:
 ```bash
 python tests/test_master.py
 ```
+
+---
+
+## 🤝 Contributing & Community Backlog
+
+- Check out [CONTRIBUTING.md](CONTRIBUTING.md) for environment setup, architecture overview, coding standards, and PR guidelines.
+- Explore [ISSUES.md](ISSUES.md) for the active list of tracked bugs, feature requests, and roadmap items open for contribution.
+
 
 
 
